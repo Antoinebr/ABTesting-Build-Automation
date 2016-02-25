@@ -7,7 +7,7 @@ Setup basé sur Grunt pour transformer un set de fichier
 en un seul et unique fichier (package) JavaScript (le build) executable.
 
 
-![demo](http://g.recordit.co/6NLV6dfEYI.gif)
+![demo](http://g.recordit.co/81aEJxsNJ8.gif)
 
 ## Utilisation
 
@@ -23,7 +23,7 @@ grunt watch
 
 ```
 
-A chaque modification dans les fichiers suivants relancera le build
+Un build sera lancé à chaque modification dans un des fichiers suivants
 
 * app.js
 * partials/index.html

@@ -10,5 +10,7 @@ $('body').append('<style>'+buildsource.style+'</style>');
 
 
 $('h1').on('click',function(){
-  $(this).hide();
+
+  $(this).css('font-size','100px');
+
 });

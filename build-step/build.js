@@ -1,6 +1,6 @@
 
 var buildsource = {};
 
-buildsource.index = '<h1> Je suis le h1</h1>';
+buildsource.index = '<section>  <h1>Je suis le title :) </h1></section>';
 
-buildsource.style = 'h1{color:red}';
+buildsource.style = 'section h1{color:red;font-size:10px}';
