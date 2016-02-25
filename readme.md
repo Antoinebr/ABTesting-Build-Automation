@@ -6,6 +6,9 @@ Setup basé sur Grunt pour transformer un set de fichier
 * js
 en un seul et unique fichier (package) JavaScript (le build) executable.
 
+
+![demo](http://g.recordit.co/6NLV6dfEYI.gif)
+
 ## Utilisation
 
 **Vous avez besoin de Grunt**

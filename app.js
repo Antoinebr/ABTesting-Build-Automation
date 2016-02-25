@@ -7,4 +7,8 @@ $('body').append('<style>'+buildsource.style+'</style>');
 
 
 // Logique du code
-console.log('Mon code');
+
+
+$('h1').on('click',function(){
+  $(this).hide();
+});
