@@ -25,6 +25,8 @@ Tapez dans votre terminal
 
 ```
 
+grunt auto_install
+
 grunt watch
 
 ```
@@ -37,9 +39,9 @@ Un build sera lancé à chaque modification dans un des fichiers suivants
 
 ### Gestion des dépendances
 
-Si vous avez besoin d'inclure certaines librairie dans vos test vous pouvez les glisser dans le dossier libs (ou les récupérer par npm) puis ensuite vous pouvez les inclure dans votre app.js
+Si vous avez besoin d'inclure certaines librairies dans vos tests vous pouvez les glisser dans le dossier libs (ou les récupérer par npm) puis ensuite vous pouvez les inclures dans votre app.js
 
-**Votre lib doit être inclure dans une function anonyme de l'objet module**
+**Votre lib doit être incluse dans une function anonyme de l'objet module**
 
 ```javascript
 // ./libs/slider.js
