@@ -60,6 +60,8 @@ module.exports = function(grunt){
       }
     },
 
+
+
     /**
     *
     * Concatenne les js
@@ -75,6 +77,19 @@ module.exports = function(grunt){
       },
     },
 
+
+
+    /**
+    *
+    *  Gestion des dépendances avec browserify
+    *
+    */
+    browserify: {
+      main: {
+        src: 'build.js',
+        dest: 'build.js'
+      }
+    },
 
     /**
     *
@@ -107,7 +122,9 @@ module.exports = function(grunt){
 
   grunt.loadNpmTasks('grunt-contrib-sass');
 
+  grunt.loadNpmTasks('grunt-browserify');
+
   // créer un ensemble de tache
-  grunt.registerTask('default', ['sass','filesToJavascript','concat']);
+  grunt.registerTask('default', ['sass','filesToJavascript','concat','browserify']);
 
 };

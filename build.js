@@ -16,7 +16,17 @@ function AbTest(id){
   this.id = id;
 }
 
+
+// Injection des dépendances avec browserify
+
+//var slider = require ('./libs/slider'); slider();
+var abCookie = require ('./libs/jqueryCookies.js'); abCookie();
+
+
+
+// Instanciation
 var myAbTest = new AbTest(321);
+
 
 // Injecte les styles dans la page
 myAbTest.runStyle = function(){
@@ -28,10 +38,10 @@ myAbTest.runHtml = function(){
   $('body').append(buildsource.index);
 };
 
-// Déclanche une action au click
 myAbTest.listenClick = function(){
   $('#ab-title').click(function(){
-    alert('42 ?');
+    alert('T\'est balaise toi !');
+    $.cookie('antoineCookie', 'the-value', { expires: 7 });
   });
 };
 
