@@ -1,6 +1,14 @@
 # ABTesting Build Automation
 
-Setup basé sur Grunt pour transformer un set de fichier
+Automatisation de construction d'un test d'ABtesting pour les intégrateurs de tests. Ce système vous permet de travailler votre css / js / html dans des fichiers distrincts et séparés.
+
+Vous n'autrez donc plus besoin de minifier vos fichiers CSS / HTLM, puis de copier/coller ces même fichiers dans votre app.js. Terminé la gestion fastidieuse des dépendances grace à Browserify.
+
+Vous avez l'habitude d'écrire du CSS avec SASS ? C'est maintenant possible !
+
+
+
+Concrètement le setup est basé sur Grunt pour transformer un set de fichier
 
 * html
 * scss
@@ -12,20 +20,28 @@ L'injection des dépendances est géré avec [Browserify](http://browserify.org/
 
 
 
+Démo :
 
 ![demo](http://g.recordit.co/81aEJxsNJ8.gif)
 
+
+
 ## Utilisation
 
+### Installation
 **Vous avez besoin de Grunt**
+
+```
+
+grunt auto_install
+
+```
 
 ### Génération du build
 
 Tapez dans votre terminal
 
 ```
-
-grunt auto_install
 
 grunt watch
 
