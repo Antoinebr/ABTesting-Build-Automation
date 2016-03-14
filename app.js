@@ -17,7 +17,6 @@ function AbTest(id){
 var abCookie = require ('./libs/jqueryCookies.js'); abCookie();
 
 
-
 // Instanciation
 var myAbTest = new AbTest(321);
 
