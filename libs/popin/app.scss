@@ -1,0 +1,23 @@
+.parentDisable {
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  background: rgba(0, 0, 0, .6);
+}
+.popin {
+  padding: 15px;
+  width: 600px;
+  min-height: 280px;
+  margin: -140px auto 0 -300px;
+  color: #000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #FFF;
+  //background: url(/static/uploads/ab_testing/bg.jpg)
+}

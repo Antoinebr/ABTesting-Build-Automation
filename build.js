@@ -2,64 +2,95 @@
 
 var buildsource = {};
 
-buildsource.index = '<section>  <h1 id="ab-title">Je suis le title :) </h1></section>';
+buildsource.index = '<div id="ab-info-bar" class="ab-info-bar abb-hidden-xs">  <div class="ab-info-bar-container">    Hello World  </div>  <span class="ab-info-bar-close">X</span></div><div id="pop1" class="parentDisable">  <div class="popin-container">    <div class="popin">      <h2> Hello World</h2>    </div>  </div></div>';
 
-buildsource.style = 'section h1{color:red;font-size:180px}';
-// Prototype
+buildsource.style = '.parentDisable{z-index:999;width:100%;height:100%;display:none;position:fixed;top:0;left:0;background:#000;background:rgba(0,0,0,0.6)}.popin{padding:15px;width:600px;min-height:280px;margin:-140px auto 0 -300px;color:#000;position:fixed;top:50%;left:50%;background-color:#FFF}.logo-fan-edition-block,.ribbon-right,.ribon-left{display:inline-block;position:relative}.ab-info-bar-container span{display:inline-block;vertical-align:top;margin-top:2px}.logo-fan-edition-block{top:8px;margin-left:5px;vertical-align:top}.ab-info-bar-logo{position:relative;top:-18px;vertical-align:top;margin-right:10px}@media only screen and (max-width: 1124px){.abb-hidden-sm{display:none}}@media only screen and (max-width: 871px){.abb-hidden-xs{display:none}}.ab-info-bar{height:38px;line-height:38px;width:100%;background-color:#eaeaea;border-color:#2F418E;color:#000;text-align:center;position:fixed;left:0;right:0;bottom:0;z-index:9999999999999999999999}.ab-info-bar-close{position:fixed;bottom:10px;right:30px;cursor:pointer;border:1px solid #000;border-radius:90px;height:24px;width:24px;line-height:24px}';
 AbTest.prototype = {
-  event: function(eventName){
+  abEvent: function(eventName){
     ABTastyEvent(eventName,null,this.id);
+  },
+  about: function(){
+    console.log('Test '+this.id+' is running');
+  },
+  runStyle: function(){
+    $('body').append('<style>'+this.buildsource.style+'</style>');
   }
 };
-
-// Constructeur
-function AbTest(id){
+function AbTest(id,buildsource){
   this.id = id;
+  this.buildsource = buildsource;
 }
-
-
-// Injection des dépendances avec browserify
-
-//var slider = require ('./libs/slider'); slider();
-var abCookie = require ('./libs/jqueryCookies.js'); abCookie();
-
-
-// Instanciation
-var myAbTest = new AbTest(321);
-
-
-// Injecte les styles dans la page
-myAbTest.runStyle = function(){
-  $('body').append('<style>'+buildsource.style+'</style>');
-};
-
-// Inject le HTML
+var abPopin = require('./libs/popin/app.js');
+var jqueryCookie = require('./libs/jqueryCookie/app.js'); jqueryCookie();
+var infoBar = require('./libs/infoBar/app.js'); infoBar.init();
+var myAbTest = new AbTest(97909,buildsource);
 myAbTest.runHtml = function(){
   $('body').append(buildsource.index);
 };
 
+
+
 myAbTest.listenClick = function(){
-  $('#ab-title').click(function(){
-    alert('T\'est balaise toi !');
-    $.cookie('antoineCookie', 'the-value', { expires: 7 });
+  var that = this;
+  $('.ab-info-bar-close').click(function(){
+    infoBar.closeBar();
+    that.abEvent('popinClosed');
   });
 };
-
-// Init le test
 myAbTest.init = function(){
+  this.about();
   this.runStyle();
   this.runHtml();
   this.listenClick();
+  abPopin.pop('pop1');
 };
-
 
 
 myAbTest.init();
 
-},{"./libs/jqueryCookies.js":2}],2:[function(require,module,exports){
-module.exports = function(){
+},{"./libs/infoBar/app.js":2,"./libs/jqueryCookie/app.js":3,"./libs/popin/app.js":4}],2:[function(require,module,exports){
+module.exports = {
+  init: function(settings){
 
-  // Jquery Cookie
+    if(typeof(settings) !== "undefined"){
+      this.bar = settings.bar;
+      this.cookieName = settings.cookieName;
+    }else{
+      this.bar = "#ab-info-bar";
+      this.cookieName = "ab-info-bar";
+    }
+  },
+  closeBar: function(){
+    var that = this;
+
+    $(this.bar).fadeOut();
+    $(this.bar).addClass('ab-info-bar-closed');
+    if (isNaN(that.getCookie(this.cookieName))){
+      that.setCookie(this.cookieName, '1');
+    }else{
+      var newCookieValue = that.getCookie(this.cookieName) + 1;
+      that.setCookie(this.cookieName, newCookieValue );
+    }
+
+  },
+  setCookie: function(cookieName,cookieValueString){
+    console.log('SET COOKIE FIRED !');
+    $.cookie(cookieName, cookieValueString, { expires: 7, path: '/' });
+  },
+  getCookie: function(cookieName){
+    var value = null;
+    if($.cookie(cookieName) == "undefined" ){
+      value = 0;
+    }else{
+      value = parseInt($.cookie(cookieName));
+    }
+    return value;
+  }
+
+};
+
+},{}],3:[function(require,module,exports){
+module.exports = function(){
   var pluses = /\+/g;
 
   function encode(s) {
@@ -76,20 +107,16 @@ module.exports = function(){
 
   function parseCookieValue(s) {
     if (s.indexOf('"') === 0) {
-      // This is a quoted cookie as according to RFC2068, unescape...
       s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
     }
 
     try {
-      // Replace server-side written pluses with spaces.
-      // If we can't decode the cookie, ignore it, it's unusable.
       s = decodeURIComponent(s.replace(pluses, ' '));
     } catch (e) {
       return;
     }
 
     try {
-      // If we can't parse the cookie, ignore it, it's unusable.
       return config.json ? JSON.parse(s) : s;
     } catch (e) { }
   }
@@ -100,8 +127,6 @@ module.exports = function(){
   }
 
   var config = $.cookie = function (key, value, options) {
-
-    // Write
     if (value !== undefined && !$.isFunction(value)) {
       options = $.extend({}, config.defaults, options);
 
@@ -119,13 +144,7 @@ module.exports = function(){
       ].join(''));
     }
 
-    // Read
-
     var result = key ? undefined : {};
-
-    // To prevent the for loop in the first place assign an empty array
-    // in case there are no cookies at all. Also prevents odd result when
-    // calling $.cookie().
     var cookies = document.cookie ? document.cookie.split('; ') : [];
 
     for (var i = 0, l = cookies.length; i < l; i++) {
@@ -134,12 +153,9 @@ module.exports = function(){
       var cookie = parts.join('=');
 
       if (key && key === name) {
-        // If second argument (value) is a function it's a converter...
         result = read(cookie, value);
         break;
       }
-
-      // Prevent storing a cookie that we couldn't decode.
       if (!key && (cookie = read(cookie)) !== undefined) {
         result[name] = cookie;
       }
@@ -154,13 +170,23 @@ module.exports = function(){
     if ($.cookie(key) === undefined) {
       return false;
     }
-
-    // Must not alter options, thus extending a fresh object...
     $.cookie(key, '', $.extend({}, options, { expires: -1 }));
     return !$.cookie(key);
   };
 
-  // Jquery Cookie
+};
+
+},{}],4:[function(require,module,exports){
+module.exports = {
+  pop: function(div) {
+    document.getElementById(div).style.display='block';
+    return false;
+  },
+
+  hide: function(div) {
+    document.getElementById(div).style.display='none';
+    return false;
+  }
 
 };
 

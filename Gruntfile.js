@@ -41,6 +41,29 @@ module.exports = function(grunt){
     },
 
 
+
+    /**
+    *
+    *  Gestion des dépendances avec browserify
+    *
+    */
+    autoprefixer: {
+      options: {
+        browsers: ['last 2 versions', 'ie 8', 'ie 9']
+      },
+      your_target: {
+        // Target-specific file lists and/or options go here.
+      },
+      main: {
+        expand: true,
+        flatten: true,
+        src: 'partials/style.css',
+        dest: 'partials/'
+      },
+    },
+
+
+
     /**
     *
     * filesToJavascript
@@ -91,6 +114,24 @@ module.exports = function(grunt){
       }
     },
 
+
+
+    /**
+    *
+    * Supprime les commentaires
+    *
+    */
+    comments: {
+      js: {
+        options: {
+          singleline: true,
+          multiline: true
+        },
+        src: [ 'build.js']
+      },
+    },
+
+
     /**
     *
     * Ecoute les modifications dans les fichiers renseigné dans l'array files
@@ -124,7 +165,11 @@ module.exports = function(grunt){
 
   grunt.loadNpmTasks('grunt-browserify');
 
+  grunt.loadNpmTasks('grunt-autoprefixer');
+
+  grunt.loadNpmTasks('grunt-stripcomments');
+
   // créer un ensemble de tache
-  grunt.registerTask('default', ['sass','filesToJavascript','concat','browserify']);
+  grunt.registerTask('default', ['sass','autoprefixer','filesToJavascript','concat','browserify','comments']);
 
 };

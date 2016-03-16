@@ -57,13 +57,15 @@ Un build sera lancé à chaque modification dans un des fichiers suivants
 
 Si vous avez besoin d'inclure certaines librairies dans vos tests vous pouvez les glisser dans le dossier libs (ou les récupérer par npm) puis ensuite vous pouvez les inclures dans votre app.js
 
-**Votre lib doit être incluse dans une function anonyme de l'objet module**
+
 
 ```javascript
-// ./libs/slider.js
-module.exports = function(){
+// ./libs/hello.js
+module.exports = {
 
-  console.log('Je suis un module :)');
+  sayHello :function(){
+    console.log('Je suis un module :)');
+  }
 
 };
 
@@ -73,12 +75,52 @@ Puis instanciez dans app.js
 
 ```javascript
 
-var slider = require ('./libs/slider');
-slider();
+var hello = require ('./libs/hello.js');
+hello.sayHello();
 
 ```
 
+
+
 Votre librairie est bien chargée dans votre test !
+
+### Plugins
+
+### Info bar
+
+(affiche une info bar collé sur le bas de la fenêtre)
+
+**Dans app.js***
+
+```javascript
+var infoBar = require('./libs/infoBar/app.js');
+var jqueryCookie = require('./libs/jqueryCookie/app.js'); jqueryCookie();
+
+
+infoBar.init({
+  bar:".mybar", // Spécifiez le nom l'element  ou par defaut #ab-info-bar
+  cookieName: "myCustomCookie" // Spécifiez le nom d'un cookie ou par defaut "ab-info-bar"
+});
+```
+
+**Dans style.scss ***
+
+```CSS
+@import "libs/infoBar/app.scss";
+```
+
+**Dans partials/index.html**
+
+copiez coller le modèle de libs/infoBar/index.html
+
+```html
+<div id="ab-info-bar" class="ab-info-bar abb-hidden-xs">
+<div class="ab-info-bar-container">
+Hello World
+</div>
+<span class="ab-info-bar-close">X</span>
+</div>
+```
 
 
 ### Utilisation du build

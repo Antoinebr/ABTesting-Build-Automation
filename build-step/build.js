@@ -1,6 +1,6 @@
 
 var buildsource = {};
 
-buildsource.index = '<section>  <h1 id="ab-title">Je suis le title :) </h1></section>';
+buildsource.index = '<div id="ab-info-bar" class="ab-info-bar abb-hidden-xs">  <div class="ab-info-bar-container">    Hello World  </div>  <span class="ab-info-bar-close">X</span></div><div id="pop1" class="parentDisable">  <div class="popin-container">    <div class="popin">      <h2> Hello World</h2>    </div>  </div></div>';
 
-buildsource.style = 'section h1{color:red;font-size:180px}';
+buildsource.style = '.parentDisable{z-index:999;width:100%;height:100%;display:none;position:fixed;top:0;left:0;background:#000;background:rgba(0,0,0,0.6)}.popin{padding:15px;width:600px;min-height:280px;margin:-140px auto 0 -300px;color:#000;position:fixed;top:50%;left:50%;background-color:#FFF}.logo-fan-edition-block,.ribbon-right,.ribon-left{display:inline-block;position:relative}.ab-info-bar-container span{display:inline-block;vertical-align:top;margin-top:2px}.logo-fan-edition-block{top:8px;margin-left:5px;vertical-align:top}.ab-info-bar-logo{position:relative;top:-18px;vertical-align:top;margin-right:10px}@media only screen and (max-width: 1124px){.abb-hidden-sm{display:none}}@media only screen and (max-width: 871px){.abb-hidden-xs{display:none}}.ab-info-bar{height:38px;line-height:38px;width:100%;background-color:#eaeaea;border-color:#2F418E;color:#000;text-align:center;position:fixed;left:0;right:0;bottom:0;z-index:9999999999999999999999}.ab-info-bar-close{position:fixed;bottom:10px;right:30px;cursor:pointer;border:1px solid #000;border-radius:90px;height:24px;width:24px;line-height:24px}';
