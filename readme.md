@@ -128,9 +128,9 @@ Hello World
 Copiez collez le contenu de build.js dans votre console ou copiez le dans l'input dédié au JavaScript de votre solution d'ABtesting
 
 
-### Démarer un nouveau projet
+### Démarrer un nouveau projet
 
 ```
 git clone git@github.com:Antoinebr/ABTesting-Build-Automation.git new-test
 
-``
+```
