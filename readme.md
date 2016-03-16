@@ -86,7 +86,7 @@ Votre librairie est bien chargée dans votre test !
 
 ### Plugins
 
-### Info bar
+#### Info bar
 
 (affiche une info bar collé sur le bas de la fenêtre)
 
@@ -103,7 +103,7 @@ infoBar.init({
 });
 ```
 
-**Dans style.scss ***
+**Dans style.scss**
 
 ```CSS
 @import "libs/infoBar/app.scss";
@@ -126,3 +126,11 @@ Hello World
 ### Utilisation du build
 
 Copiez collez le contenu de build.js dans votre console ou copiez le dans l'input dédié au JavaScript de votre solution d'ABtesting
+
+
+### Démarer un nouveau projet
+
+```
+git clone git@github.com:Antoinebr/ABTesting-Build-Automation.git new-test
+
+``
